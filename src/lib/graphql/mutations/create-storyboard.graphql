@@ -1,0 +1,7 @@
+mutation CreateStoryboard($title: String!, $description: String!) {
+	createStoryboard(input: { storyboard: { title: $title, description: $description } }) {
+		storyboard {
+			...StoryboardFragment
+		}
+	}
+}

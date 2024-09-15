@@ -1,0 +1,7 @@
+mutation DeleteStoryboard($id: Int!) {
+	deleteStoryboard(input: { id: $id }) {
+		storyboard {
+			...StoryboardFragment
+		}
+	}
+}

@@ -1,0 +1,9 @@
+query Storyboards($first: Int) {
+	query {
+		storyboards(first: $first) {
+			nodes {
+				...StoryboardFragment
+			}
+		}
+	}
+}

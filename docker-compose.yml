@@ -1,0 +1,43 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:15.8
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+    networks:
+      - storyboard
+  pg_graphql:
+    build: ./
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+      POSTGRAPHILE_CORS: 'true'
+    command: >
+      --enhance-graphiql
+      --allow-explain
+      --enable-query-batching
+      --schema public
+      --append-plugins @graphile-contrib/pg-simplify-inflector
+      --watch
+      --legacy-relations omit
+      --port 4000
+      --host 0.0.0.0
+      --cors
+    ports:
+      - '4000:4000'
+    networks:
+      - storyboard
+
+volumes:
+  postgres_data:
+
+networks:
+  storyboard:

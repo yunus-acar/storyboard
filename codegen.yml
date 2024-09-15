@@ -1,0 +1,14 @@
+schema:
+  - ${VITE_GRAPHQL_URL}
+overwrite: true
+documents:
+  - './src/lib/graphql/**/*.graphql'
+generates:
+  src/lib/graphql/generated.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - graphql-codegen-svelte-apollo
+    config:
+      clientPath: '$lib/apollo-client'
+      dedupeFragments: true

@@ -1,0 +1,7 @@
+fragment StoryboardFragment on Storyboard {
+	createdAt
+	description
+	id
+	nodeId
+	title
+}
