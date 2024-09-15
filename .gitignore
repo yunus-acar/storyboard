@@ -5,7 +5,7 @@ node_modules
 .vercel
 /.svelte-kit
 /build
-/lib/graphql/generated.ts
+src/lib/graphql/generated.ts
 
 # OS
 .DS_Store
